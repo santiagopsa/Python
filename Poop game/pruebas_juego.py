@@ -1,6 +1,8 @@
 import pygame
 from random import randint
 
+game_over=False
+salida=False
 #Inicializa el juego
 pygame.init()
 
@@ -24,22 +26,6 @@ puntaje=0
 fuente= pygame.font.Font('freesansbold.ttf',32)
 texto_x=10
 texto_y=10
-
-
-
-#Definicion Game Over
-def game_over(x,y):
-    exit=False
-    while not exit:
-        for e in pygame.event.get():
-            if e.type != pygame.MOUSEBUTTONDOWN:
-                pantalla.fill((0,0,0))
-                texto = fuente.render(f'Juego terminado', True , (255,255,255))
-                pantalla.blit(texto,(x,y))
-                exit=True
-            if e.type==pygame.QUIT:
-                pygame.quit()
-    #while pygame.event.
 
 #funcion mostrar puntaje
 def mostrar_puntaje(x,y):
@@ -118,8 +104,16 @@ while True:
             puntaje += 100
             muevoe_x[n] = randint(0,700)
             muevoe_y[n] = randint(50,300)
-        if muevoe_y[n] >= 500:
-            game_over(20,100)
+        if muevoe_y[n] >= 462:
+            game_over=True
+            salida=False
+
+    while salida != True and game_over==True:
+        pantalla.fill((0, 0, 0))
+        texto = fuente.render(f'Juego terminado - no eres muy bueno para esto', True, (255, 255, 255))
+        pantalla.blit(texto, (20, 40))
+        salida = True
+        game_over=False
 
     for evento in pygame.event.get():
         #movimiento del jugador va con el mouse
@@ -136,6 +130,9 @@ while True:
             muevoj_x=20
         elif muevoj_x >= 730:
             muevoj_x=730
+
+        #Si game Over
+
 
     if muevob_y <=0:
         muevob_y = 500
