@@ -117,7 +117,8 @@ while True:
             muevoe_x[n] = randint(0,700)
             muevoe_y[n] = randint(50,300)
 
-        if muevoe_y[n] >= 200:
+        if muevoe_y[n] > 500:
+            print(muevoe_y)
             for k in range(numero_enemigos):
                 muevoe_y[k]=-10000
                 muevoj_y=10000
