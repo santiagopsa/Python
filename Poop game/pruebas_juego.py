@@ -1,8 +1,11 @@
 import pygame
 from random import randint
+from pygame import mixer
 
 game_over=False
 salida=False
+iniciado=True
+cuentagotas = 0
 #Inicializa el juego
 pygame.init()
 
@@ -26,6 +29,12 @@ puntaje=0
 fuente= pygame.font.Font('freesansbold.ttf',32)
 texto_x=10
 texto_y=10
+
+#cargando musica
+mixer.music.load('Poop game/mario.mp3')
+mixer.music.set_volume(0.1)
+mixer.music.play(-1)
+
 
 #funcion mostrar puntaje
 def mostrar_puntaje(x,y):
@@ -78,7 +87,10 @@ def bala(x,y):
 def detectar_colision(x1,x2,y1,y2):
     distancia = ((x2-x1)**2 + (y2-y1)**2)**0.5
     if 30 >= distancia:
-       return True
+        sonido_bala = mixer.Sound('Poop game/muerto.mp3')
+        sonido_bala.play()
+        sonido_bala.set_volume(0.2)
+        return True
     else:
         return False
 
@@ -104,21 +116,21 @@ while True:
             puntaje += 100
             muevoe_x[n] = randint(0,700)
             muevoe_y[n] = randint(50,300)
-        if muevoe_y[n] >= 462:
-            game_over=True
-            salida=False
 
-    while salida != True and game_over==True:
-        pantalla.fill((0, 0, 0))
-        texto = fuente.render(f'Juego terminado - no eres muy bueno para esto', True, (255, 255, 255))
-        pantalla.blit(texto, (20, 40))
-        salida = True
-        game_over=False
+        if muevoe_y[n] >= 200:
+            for k in range(numero_enemigos):
+                muevoe_y[k]=-10000
+                muevoj_y=10000
+            game_over=True
+            break
 
     for evento in pygame.event.get():
         #movimiento del jugador va con el mouse
         muevoj_x=pygame.mouse.get_pos()[0]
         if evento.type == pygame.MOUSEBUTTONUP:
+            sonido_bala=mixer.Sound('Poop game/disparo.mp3')
+            sonido_bala.play()
+            sonido_bala.set_volume(0.2)
             if bala_visible==False:
                 muevob_x = pygame.mouse.get_pos()[0]
                 bala(muevob_x,muevob_y)
@@ -131,8 +143,19 @@ while True:
         elif muevoj_x >= 730:
             muevoj_x=730
 
-        #Si game Over
+    #Si game Over
 
+    if game_over:
+        bala_visible = False
+        texto = fuente.render(f'Juego terminado', True, (255, 255, 255))
+        pantalla.blit(texto, (30, 250))
+        mixer.music.fadeout(1000)
+        if cuentagotas==0:
+            print(cuentagotas)
+            game = mixer.Sound('Poop game/gameover.mp3')
+            game.set_volume(0.1)
+            game.play()
+            cuentagotas += 1
 
     if muevob_y <=0:
         muevob_y = 500
