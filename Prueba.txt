@@ -1,1 +1,2 @@
- tres tristes tigres comen trigo
+import bs4
+import requests
