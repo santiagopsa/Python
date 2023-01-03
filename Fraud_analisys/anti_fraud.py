@@ -83,26 +83,3 @@ while time_difference<30:
         else:
             print('no son iguales')
 
-
-
-
-
-
-
-# difference distance
-'''distance = round(float(fr.face_distance([decodified_faceA], decodified_faceB)), 2)
-print(distance)'''
-
-# print distance in square
-'''cv2.putText(foto_control1, f'La distancia es {str(distance)} y las caras {caras}',
-            (lugar_cara_B[3], lugar_cara_B[0]),
-            cv2.FONT_HERSHEY_TRIPLEX,
-            0.5,
-            (0, 0, 255))'''
-
-# Show images
-'''
-cv2.imshow('Foto Santi', foto_control2)
-
-
-'''
