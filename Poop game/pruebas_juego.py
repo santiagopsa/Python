@@ -13,14 +13,14 @@ pygame.init()
 pantalla = pygame.display.set_mode((800,600))
 
 #Se pone el titulo de la ventana
-pygame.display.set_caption('Poop game/Invacion Espacial')
+pygame.display.set_caption('Invacion Espacial')
 
 #Se pone el icono de la ventana
-icono = pygame.image.load('Poop game/space-gun.png')
+icono = pygame.image.load('space-gun.png')
 pygame.display.set_icon(icono)
 
 #Definicion de la imagen del jugador
-img_protagonista = pygame.image.load('Poop game/poop.png')
+img_protagonista = pygame.image.load('poop.png')
 muevoj_x=20
 muevoj_y=520
 
@@ -31,7 +31,7 @@ texto_x=10
 texto_y=10
 
 #cargando musica
-mixer.music.load('Poop game/mario.mp3')
+mixer.music.load('mario.mp3')
 mixer.music.set_volume(0.1)
 mixer.music.play(-1)
 
@@ -56,7 +56,7 @@ numero_enemigos=8
 #Definicion variables de Enemigo
 correr_x=0
 for e in range(numero_enemigos):
-    img_enemigo.append(pygame.image.load('Poop game/enemy.png'))
+    img_enemigo.append(pygame.image.load('enemy.png'))
     muevoe_x.append(42+correr_x)
     muevoe_y.append(42)
     e_x_incremeto.append(0.1)
@@ -64,7 +64,7 @@ for e in range(numero_enemigos):
     correr_x += 90
 
 #Definicion de la imagen de la bala
-img_bala = pygame.image.load('Poop game/bala.png')
+img_bala = pygame.image.load('bala.png')
 muevob_x=0
 muevob_y=520
 b_x_incremeto=0
@@ -87,7 +87,7 @@ def bala(x,y):
 def detectar_colision(x1,x2,y1,y2):
     distancia = ((x2-x1)**2 + (y2-y1)**2)**0.5
     if 30 >= distancia:
-        sonido_bala = mixer.Sound('Poop game/muerto.mp3')
+        sonido_bala = mixer.Sound('muerto.mp3')
         sonido_bala.play()
         sonido_bala.set_volume(0.2)
         return True
@@ -129,7 +129,7 @@ while True:
         #movimiento del jugador va con el mouse
         muevoj_x=pygame.mouse.get_pos()[0]
         if evento.type == pygame.MOUSEBUTTONUP:
-            sonido_bala=mixer.Sound('Poop game/disparo.mp3')
+            sonido_bala=mixer.Sound('disparo.mp3')
             sonido_bala.play()
             sonido_bala.set_volume(0.2)
             if bala_visible==False:
@@ -153,7 +153,7 @@ while True:
         mixer.music.fadeout(1000)
         if cuentagotas==0:
             print(cuentagotas)
-            game = mixer.Sound('Poop game/gameover.mp3')
+            game = mixer.Sound('gameover.mp3')
             game.set_volume(0.1)
             game.play()
             cuentagotas += 1
