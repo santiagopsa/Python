@@ -8,6 +8,9 @@ from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required
 from email_validator import validate_email, EmailNotValidError
+from flask_login import login_required
+from flask import request, redirect, url_for, flash
+from app.models import Debtor
 import os
 import binascii
 
@@ -100,6 +103,12 @@ def login():
     # Render the login template and pass the LoginForm instance to it
     return render_template('login.html', form=form)
 
+@app.route('/add_debtor', methods=['POST'])
+@login_required
+def add_debtor():
+# Get form data and create a new Debtor object
+# Save the debtor to the database
+
 @app.route('/logout')
 @login_required
 def logout():
@@ -135,6 +144,8 @@ class Debtor(db.Model):
     sms_enabled = db.Column(db.Boolean, default=False)
     reminder_interval = db.Column(db.Integer, default=7)
     last_email_date = db.Column(db.Date, default=datetime.now().date())
+    last_sms_date = db.Column(db.Date, default=datetime.now().date())
+    messages = db.Column(db.Text, default="")
 
 def send_email(debtor):
     # Implementation for sending email reminders
@@ -176,6 +187,12 @@ def index():
     else:
         debtors = Debtor.query.all()
         return render_template('index.html', debtors=debtors)
+
+@app.route('/dashboard')
+@login_required
+def dashboard():
+    debtors = Debtor.query.filter_by(user_id=current_user.id).all()
+    return render_template('dashboard.html', debtors=debtors)
 
 
 @app.route('/delete/<int:id>')

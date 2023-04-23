@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="d40160bb-890f-4692-86a0-5f083fb74d1b" name="namecheap">
+        <fileTransfer rootFolder="/home/credcnqu" accessType="SFTP" host="198.54.116.91" port="21098" sshConfigId="884c2c06-03ae-4bee-9413-7a7a2c9f0084" sshConfig="credcnqu@198.54.116.91:21098 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

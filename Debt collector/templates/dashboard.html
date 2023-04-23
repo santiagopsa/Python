@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+  <h1>Welcome to the Dashboard</h1>
+
+  <form method="POST" action="{{ url_for('add_debtor') }}">
+    <!-- Add the fields for name, email, phone, debt, reminder_interval, and reminder methods -->
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Debt</th>
+        <th>Reminder Interval</th>
+        <th>Email Reminders</th>
+        <th>SMS Reminders</th>
+        <th>WhatsApp Reminders</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for debtor in debtors %}
+        <tr>
+          <td>{{ debtor.name }}</td>
+          <td>{{ debtor.phone }}</td>
+          <td>{{ debtor.email }}</td>
+          <td>{{ debtor.debt }}</td>
+          <td>{{ debtor.reminder_interval }} days</td>
+          <td>{{ "Yes" if debtor.email_enabled else "No" }}</td>
+          <td>{{ "Yes" if debtor.sms_enabled else "No" }}</td>
+          <td>{{ "Yes" if debtor.whatsapp_enabled else "No" }}</td>
+          <td><a href="{{ url_for('delete_debtor', debtor_id=debtor.id) }}">Delete</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
