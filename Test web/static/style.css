@@ -1,0 +1,66 @@
+body {
+    margin: 0;
+    background: #09080A;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 120%;
+    height: 100vh;
+    display: flex;
+}
+
+.left-bar {
+    background: #151718;
+    width: 20%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    box-sizing: border-box;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.middle-bar {
+    text-align: center;
+    align-content: center;
+}
+.main-image {
+    display: inline-block;
+    margin: 0 auto;
+}
+@font-face {
+    font-family: 'Futurist';
+    src: url('futurist.ttf') format('truetype');
+}
+.right-bar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+.title {
+    color: #E1A327;
+    font-family: 'Futurist', sans-serif;
+    text-align: center;
+}
+
+/* Media query for screens smaller than 600px */
+@media (max-width: 600px) {
+    .container {
+        flex-wrap: wrap;
+    }
+    .left-bar, .middle-bar, .right-bar {
+        width: 100%;
+    }
+}
