@@ -1,0 +1,14 @@
+binance_api_key = 'TKBF8fDpuTIH3WMzmjSQjItkvwy4CxkRpxCik3VpxPbTAEThyVafWHpJwpjBmzxt'
+binance_api_secret = 'hk0uXTf4oudnlLWbseZS4H0yhhg1SjsxvurJh11RZWoVAUWKWSSCYIhBytAIRjad'
+mailgun_url="https://api.mailgun.net/v3/mg.peaku.co/messages"
+mailgun_domain = 'mg.peaku.co'
+mailgun_api_key="key-3eb4aee87fac3eaf36efa2a78be5de0a"
+twitter_access_token = 'AAAAAAAAAAAAAAAAAAAAAMJOlAEAAAAAl1Jvh2hD%2Bh2TyX4CRhF%2FWsmTBmk%3DWS7xzs0CnOvi3MOFIv7OWXZBRdlPW4dI6ooUX6uSE8RFWLHhuO'
+twitter_access_secret = 'RTf3wmT0u66rh8uKgD4ELy3wRip28KzWglNi3nfHYOBDZNkxfU'
+mailgun_api_key_boreal="dca09039828e4708e97505f1bf310d89-c9746cf8-d857bf7b"
+mailgun_url_boreal = 'https://api.mailgun.net/v3/mg.borealreposteria.com/messages'
+coinmarketcap_api_key = '06e7a1f8-11cb-4fee-8c0b-10b9d9e09782'
+crunchbase_api_key = '887c0a4be9a8bd7bc7049620cf7d8f95'
+linkedin_Client_id = '7841cpp6cunlpp'
+linkedin_Client_secret = 'xn2BD2Y9Nu3gUyGA'
+linkedin_access_token = 'AQV5rxsqPHzE8Qyhe8cLDl5zyxlS1_JzhkazLUiiAcroFeusqMfm2V8BuDzGgVbGcwIAMT5iGJxrYHZdD6bZZRecGfHVnwqhWvpJ556mUeRF0Q7N0OkFtoV1xEmcA8OJk_HaJQMpaS11tlLTPgQEzAXHlSp_VczgmiCN0sXZLiKMoi7faDUlRxkJn5UDIvMm-Qm_w6P9HcUlxr4292hwwcW3s85ZrLXL7Z2F3jMlqRNQHTVUOUoTWM7EcpJX0TGcTSCC4Sh-i9yxaGEwJ2VYQI7bADIuoglY4cbMaAZ-XjEu4vFFuf2A4N4u1Vwe_OJHb5uhKV57TgGVYpJKTgS_GFCt_qArWA'
