@@ -1,1 +1,0 @@
-source /home/credcnqu/virtualenv/credalarm/3.9/bin/activate && cd /home/credcnqu/credalarm

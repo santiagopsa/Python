@@ -1,1 +1,0 @@
-print('La cerveza se llama\n"'+ input('El nombre de tu animal favorito: ')+' '+ input('El nombre de la novia que mas has querído: ')+'"')
