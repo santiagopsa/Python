@@ -1,8 +1,14 @@
 import pandas as pd
 import requests
-import keys
 import re
 import os
+from dotenv import load_dotenv
+# Cargar variables del archivo .env
+load_dotenv()
+
+# Usar las claves
+mailgun_api_key = os.getenv('MAILGUN_API_KEY')
+mailgun_url = os.getenv('MAILGUN_URL')
 
 def send_email_with_resumes(email, name, company):
     try:
@@ -59,8 +65,8 @@ Lider de plataforma PeakU
 
         # Send the email via Mailgun
         response = requests.post(
-            keys.mailgun_url,
-            auth=("api", keys.mailgun_api_key),
+            mailgun_url,
+            auth=("api", mailgun_api_key),
             data={
                 "from": "Santiago de PeakU <santiago@peaku.co>",
                 "to": [email],
