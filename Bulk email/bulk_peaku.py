@@ -10,7 +10,7 @@ load_dotenv()
 mailgun_api_key = os.getenv('MAILGUN_API_KEY')
 mailgun_url = os.getenv('MAILGUN_URL')
 
-def send_email_with_resumes(email, name, company):
+def send_email_with_resumes(email, name, company, experiment_label):
     try:
         # Create a log of sent emails to avoid duplicates
         if not os.path.exists("emails.csv") or os.path.getsize("emails.csv") == 0:
@@ -22,46 +22,106 @@ def send_email_with_resumes(email, name, company):
             print("Email already sent to this address.")
             return "Email already sent", None
 
-        # Email content
-        subject = "Candidatos para Desarrollador Backend"
-        body = f"""Hola {name},
+        # Define combinaciones de asuntos, cuerpos de mensaje y adjuntos con etiquetas
+        experiments = {
+            "A": {
+                "subject": "Adjunto reporte de salarios tech en Colombia",
+                "body": f"""Hola {name},
 
-Sabemos lo importante que es encontrar el talento ideal para el puesto de Desarrollador Backend que publicaste recientemente. Desde nuestra plataforma de reclutamiento, hemos analizado el perfil de la vacante y seleccionamos automáticamente a tres candidatos que podrían encajar con tus necesidades.
+                Noté que en {company} están contratando perfiles tech, y quería pasarte un reporte de salarios en base a nuestra experiencia y base de datos. Te adjunto, totalmente gratis, nuestro **Reporte de Salarios para Desarrolladores en Colombia**, que incluye:
 
-Te comparto un vistazo de lo que puedes encontrar al usar nuestra plataforma:
+                • Salarios promedio según años de experiencia (Junior, Mid, Senior).  
+                • Rangos de compensación por stack de tecnología (Backend, Frontend, Full-Stack, etc.).  
 
-1. John Alexander Arias Díaz
-   - Tecnologías: Python, Django, AWS, Docker, .Net
-   - Experiencia: Más de 5 años desarrollando arquitecturas escalables y optimizando procesos backend para empresas de tecnología.
-   - Salario esperado: COP $9.000.000 - $11.000.000 mensuales.
+                El objetivo es que puedas comparar fácilmente los montos de referencia en el mercado actual y así ajustar tus decisiones de reclutamiento en base a los datos del mercado.
 
-2. César Augusto Torres Ardila
-   - Tecnologías: Java, Spring Boot, Kubernetes, Git.
-   - Experiencia: 4 años en desarrollo backend para proyectos de alta complejidad, incluyendo contribuciones en repositorios de código abierto (GitHub).
-   - Salario esperado: COP $8.000.000 - $10.000.000 mensuales.
+                **Aclaración**: Contamos con un software SaaS especializado en contratar perfiles TI. Sin embargo, primero prefiero compartirte este documento y si necesitas acceso a nuestra plataforma, te lo puedo dar.
 
-3. Johan Rojas Rodríguez
-   - Tecnologías: Node.js, Express, MongoDB, Azure.
-   - Experiencia: Más de 3 años desarrollando e implementando soluciones backend, con enfoque en aplicaciones rápidas y seguras.
-   - Salario esperado: COP $7.000.000 - $9.000.000 mensuales.
+                Si te interesa profundizar más o tienes dudas sobre cómo optimizar tus procesos de reclutamiento, ¡cuenta conmigo!
 
-¿Por qué elegir nuestra plataforma?
-Nuestra tecnología utiliza IA para hacer match en tiempo real entre las vacantes y nuestra base de datos de candidatos disponibles. Esto te ahorra tiempo y garantiza que siempre veas perfiles relevantes como los que te compartimos aquí.
 
-Puedes explorar estos y otros perfiles directamente en nuestra plataforma. También ofrecemos una prueba gratuita para que descubras cómo puedes optimizar tu proceso de selección.
+            Saludos,
+            Santiago González Ramírez
+            Lider de plataforma PeakU
+            """,
+                "attachments": ["estudio-salarios.pdf"]
+            },
+            "B": {
+                "subject": "Desarrolladores Backend filtrados",
+                "body": f"""Hola {name},
 
-¿Te interesa probarlo? Responde a este correo y te compartimos acceso para que lo explores por ti mismo.
+            Estamos emocionados de presentarte a nuestros candidatos más destacados para el puesto de Desarrollador Backend. Nuestra plataforma ha seleccionado automáticamente a tres candidatos que podrían ser perfectos para tu empresa.
 
-Saludos,
-Santiago González Ramírez
-Lider de plataforma PeakU
-"""
+            Aquí tienes un resumen de sus perfiles:
+
+            1. John Alexander Arias Díaz
+            - Tecnologías: Python, Django, AWS, Docker, .Net
+            - Experiencia: Más de 5 años desarrollando arquitecturas escalables y optimizando procesos backend para empresas de tecnología.
+            - Salario esperado: COP $9.000.000 - $11.000.000 mensuales.
+
+            2. César Augusto Torres Ardila
+            - Tecnologías: Java, Spring Boot, Kubernetes, Git.
+            - Experiencia: 4 años en desarrollo backend para proyectos de alta complejidad, incluyendo contribuciones en repositorios de código abierto (GitHub).
+            - Salario esperado: COP $8.000.000 - $10.000.000 mensuales.
+
+            3. Johan Rojas Rodríguez
+            - Tecnologías: Node.js, Express, MongoDB, Azure.
+            - Experiencia: Más de 3 años desarrollando e implementando soluciones backend, con enfoque en aplicaciones rápidas y seguras.
+            - Salario esperado: COP $7.000.000 - $9.000.000 mensuales.
+
+            Descubre cómo nuestra plataforma puede ayudarte a encontrar el talento ideal de manera rápida y eficiente. Ofrecemos una prueba gratuita para que puedas explorar todas nuestras funcionalidades.
+
+            ¿Te gustaría probarlo? Responde a este correo y te daremos acceso inmediato.
+
+            Saludos,
+            Santiago González Ramírez
+            Lider de plataforma PeakU
+            """,
+                "attachments": ["jhon.pdf", "cesar.pdf", "johan.pdf"]
+            },
+            "C": {
+                "subject": "Prueba gratuita: Evalúa a tu próximo backend developer sin costo",
+                "body": f"""Hola {name},
+
+            He visto que {company} está en la búsqueda de un desarrollador backend. Quiero ofrecerte **acceso gratuito** a nuestra plataforma para que encuentres y evalúes a tus candidatos tech de manera rápida y eficaz.
+
+            ¿Cómo funciona?
+            1. Te doy un acceso de prueba a nuestro módulo específico para reclutamiento backend.  
+            2. Subes los CVs o referencias de los candidatos que ya tengas (o publicas tu vacante).  
+            3. La plataforma analiza automáticamente su experiencia, stack de tecnologías y habilidades clave, mostrándote quién se ajusta mejor a tus necesidades.
+
+            Gracias a este acceso podrás ver cómo la automatización de nuestro SaaS reduce el tiempo de evaluación y te ayuda a priorizar a los candidatos más prometedores.
+
+            **Aclaración**: Nuestro modelo de negocio consiste en una suscripción mensual para empresas que reclutan perfiles TI de forma recurrente. Sin embargo, antes de proponerte nada, prefiero que pruebes por ti mismo cómo funciona.
+
+            ¿Qué te parece?  
+            ¿Te gustaría probarlo para ver que tal funciona?
+
+            Saludos,
+            Santiago González Ramírez
+            Lider de plataforma PeakU
+            """,
+                "attachments": []
+            }
+            # Puedes agregar más combinaciones aquí
+        }
+
+        # Seleccionar el asunto, cuerpo de mensaje y adjuntos basado en la etiqueta del experimento
+        selected_experiment = experiments[experiment_label]
+        subject = selected_experiment["subject"]
+        body = selected_experiment["body"]
+        attachment_files = selected_experiment["attachments"]
 
         # Attach resumes
         attachments = []
-        for filename in ["jhon.pdf", "cesar.pdf", "johan.pdf"]:
-            with open(filename, "rb") as f:
-                attachments.append(("attachment", (filename, f.read(), "application/pdf")))
+        for filename in attachment_files:
+            try:
+                with open(filename, "rb") as f:
+                    attachments.append(("attachment", (filename, f.read(), "application/pdf")))
+            except FileNotFoundError:
+                print(f"Error: El archivo {filename} no se encontró.")
+            except IOError as e:
+                print(f"Error al abrir el archivo {filename}: {e}")
 
         # Send the email via Mailgun
         response = requests.post(
@@ -101,7 +161,7 @@ for index, row in data.iterrows():
     # Validate email format
     email_regex = r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
     if re.match(email_regex, recipient_email):
-        status, email_id = send_email_with_resumes(recipient_email, recipient_name, recipient_company)
+        status, email_id = send_email_with_resumes(recipient_email, recipient_name, recipient_company, "A")
         if "Email sent successfully" in status:
             delivered_emails.append(recipient_email)
 
